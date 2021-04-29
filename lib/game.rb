@@ -80,6 +80,11 @@ class Game
         puts "#{player_1_name}, c'est à votre tour !"
         my_board.add_symbol_1(player_1.player_turn(moves_possible), board)      
         Board.display_board(board)
+        empty_moves = moves_possible.empty?
+          if empty_moves == true
+            puts "What a game, it is an even game !!"
+            break
+          end 
         victory = player_1.victory_condition(victory)
           if victory == 1
             puts "#{player_2_name} is the big winner !"
@@ -89,6 +94,11 @@ class Game
         puts "#{player_2_name}, c'est à votre tour !"
         my_board.add_symbol_2(player_2.player_turn(moves_possible), board)
         Board.display_board(board)
+          empty_moves = moves_possible.empty?
+          if empty_moves == true
+            puts "What a game, it is an even game !!"
+            break
+          end 
       end
       end_of_fight(dice_of_destiny, player_1_name, player_2_name, player_1, player_2)
     end
@@ -119,6 +129,7 @@ class Game
       if sophies_choice == 3
         exit
       end
+
     end
 
     def initialize
