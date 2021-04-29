@@ -1,5 +1,5 @@
 class Player
-  attr_accessor :name , :player_moves, :play, :player_1, :player_2
+  attr_accessor :name , :player_moves, :play, :player_1, :player_2, :moves_possible
  
   def initialize(name)
     @name = name
@@ -15,7 +15,6 @@ class Player
     victory_condition_6 = ["A1" , "B1" , "C1"]
     victory_condition_7 = ["A2" , "B2" , "C2"]
     victory_condition_8 = ["A3" , "B3" , "C3"]
-
         
     if @player_moves.sort & victory_condition_1 == victory_condition_1
       puts "Victoire"
@@ -48,36 +47,56 @@ class Player
   end
 
 
-  def player_turn
+  def player_turn(moves_possible)
     puts "Where do you want to play ?"
-      play = gets.chomp.to_s
-    
-    if play == "A1"
-      @player_moves << "A1"
-      return "A1"
-    elsif play == "A2"
-      @player_moves << "A2"
-      return "A1"
-    elsif play == "A3"
-      @player_moves << "A3"
-    elsif play == "B1"
-      @player_moves << "B1"
-    elsif play == "B2"
-      @player_moves << "B2"
-    elsif play == "B3"
-      @player_moves << "B3"
-    elsif play == "C1"
-      @player_moves << "C1"
-    elsif play == "C2"
-      @player_moves << "C2"
-    elsif play == "C3"
-      @player_moves << "C3"
-    end
-  end
+            
+      while 
+        play = gets.chomp.to_s
+        move_is_correct = moves_possible.include?(play)
+        if move_is_correct == true
+          break
+        end
+        puts "Rejouez !"
+      end
 
-  def show_state
-    @player_moves
-  end
-
- 
+      if play == "A1"
+        @player_moves << "A1"
+        moves_possible.delete("A1")
+        puts "#{moves_possible}"
+        return "A1"
+      elsif play == "A2"
+        @player_moves << "A2"
+        moves_possible.delete("A2")
+        puts "#{moves_possible}"
+        return "A2"
+      elsif play == "A3"
+        @player_moves << "A3"
+        moves_possible.delete("A3")
+        return "A3"
+      elsif play == "B1"
+        @player_moves << "B1"
+        moves_possible.delete("B1")
+        return "B1"
+      elsif play == "B2"
+        @player_moves << "B2"
+        moves_possible.delete("B2")
+        return "B2"
+      elsif play == "B3"
+        @player_moves << "B3"
+        moves_possible.delete("B3")
+        return "B3"
+      elsif play == "C1"
+        @player_moves << "C1"
+        moves_possible.delete("C1")
+        return "C1"
+      elsif play == "C2"
+        @player_moves << "C2"
+        moves_possible.delete("C2")
+        return "C2"
+      elsif play == "C3"
+        @player_moves << "C3"
+        moves_possible.delete("C3")
+        return "C3"
+      end
+  end  
 end
